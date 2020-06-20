@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 
 /**
@@ -11,6 +12,9 @@ module.exports = {
 	mode: "production",
 	entry: here("./src/index.ts"),
 	devtool: "source-map",
+	plugins: [
+		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), // avoid bundling momentjs locales
+	],
 	module: {
 		rules: [
 			{
