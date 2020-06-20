@@ -1,0 +1,36 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"outDir": "./dist/",
+		"module": "ESNext",
+		"target": "es5",
+		"jsx": "react",
+		"allowJs": true,
+		"declaration": true,
+		"declarationDir": "./lib/",
+		"lib": [
+			"esnext"
+		],
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"downlevelIteration": true,
+		"noImplicitAny": false,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"moduleResolution": "node"
+	},
+	"exclude": [
+		"node_modules",
+		"lib",
+		"tests",
+		"dist"
+	],
+	"include": [
+		"src"
+	]
+}
