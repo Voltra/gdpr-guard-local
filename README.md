@@ -77,7 +77,7 @@ For instance, you can customize the savior like this:
 
 ```javascript
 const savior = new LocalStorageSavior(
-	makeConfig({
+    makeConfig({
         version: "v1.0.0",
         //storeKey will be gdpr
         //versionKey will be gdpr__version
