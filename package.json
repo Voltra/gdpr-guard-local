@@ -1,6 +1,6 @@
 {
   "name": "gdpr-guard-local",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A simple local storage adapter for gdpr-guard",
   "main": "dist/index.js",
   "module": "dist/index.js",
