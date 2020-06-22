@@ -2,9 +2,7 @@
 
 > A simple local storage adapter for gdpr-guard
 
-TODO: Make logo w/ localStorage logo
-
-<center><img src="https://raw.githubusercontent.com/Voltra/gdpr-guard/master/gdpr-guard.png" alt="Logo gdpr-guard" width="250"/></center>
+<center><img src="https://raw.githubusercontent.com/Voltra/gdpr-guard-local/dev/gdpr-guard-local.png" alt="Logo" width="250"/></center>
 
 This library predefines logic to store/save and restore [`gdpr-guard`](https://github.com/Voltra/gdpr-guard) state from localStorage.
 
@@ -47,7 +45,8 @@ type LocalStoreFactory = () => LocalStore;
 
 interface LocalStore{
     has(key: string): Promise<boolean>;
-    set(key: string, value: any, expiration: Date): Promise<void>;remove(key: string): Promise<void>;
+    set(key: string, value: any, expiration: Date): Promise<void>;
+    remove(key: string): Promise<void>;
     get(key: string): Promise<any>;
     removeExpiredKeys(): Promise<void>;
 }
