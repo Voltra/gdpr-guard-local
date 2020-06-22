@@ -1,0 +1,14 @@
+.env
+coverage/
+tmp/
+log/
+logs/
+*.log
+
+yarn.lock
+package-lock.json
+node_modules/
+.idea/
+.vscode/
+.brackets.json
+*.swp
