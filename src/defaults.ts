@@ -1,4 +1,4 @@
-import { Version, VersionComparator, LocalStoreFactory, LocalStorageConfig, LocalStore } from "./types"
+import { DateFactory, LocalStorageConfig, LocalStore, LocalStoreFactory, Version, VersionComparator } from "./types"
 import store from "store"
 import compat from "store/plugins/v1-backcompat"
 import expire from "store/plugins/expire"
@@ -18,7 +18,7 @@ plugins.forEach(plugin => store.addPlugin(plugin));
 export const defaultStoreFactory: LocalStoreFactory = () => store as LocalStore;
 
 //GDPR says max 13 months
-export const expiration = (): Date => addMonths(new Date(), 13);
+export const expiration: DateFactory = () => addMonths(new Date(), 13);
 
 export const defaultConfigParts: Partial<LocalStorageConfig> = {
 	comparator: versionComparator,

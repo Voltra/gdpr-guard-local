@@ -1,27 +1,27 @@
-import { GdprSaviorAdapter, GdprManager, GdprDeserializer, GdprManagerRaw } from "gdpr-guard"
-import { LocalStore, LocalStoreFactory, LocalStorageConfig } from "./types";
+import { GdprDeserializer, GdprManager, GdprManagerRaw, GdprSaviorAdapter } from "gdpr-guard"
+import { LocalStorageConfig, LocalStore, LocalStoreFactory } from "./types";
 import { defaultStoreFactory, makeConfig } from "./defaults";
 
-export class LocalStorageSavior extends GdprSaviorAdapter{
+export class LocalStorageSavior extends GdprSaviorAdapter {
 	protected storage: LocalStore;
-	
+
 	public constructor(
 		protected config: LocalStorageConfig = makeConfig(),
 		storeFactory: LocalStoreFactory = defaultStoreFactory,
-	){
+	) {
 		super();
 		this.storage = storeFactory();
 	}
 
-	public async updateSharedManager(_manager: GdprManager): Promise<void>{
+	public async updateSharedManager(_manager: GdprManager): Promise<void> {
 		//await Promise.resolve();
 	}
 
-	public async restore(shouldUpdate: boolean = true): Promise<GdprManager|null>{
+	public async restore(shouldUpdate: boolean = true): Promise<GdprManager | null> {
 		await this.storage.removeExpiredKeys(); // explicitely remove rexpired keys
 		const hasVersion = await this.storage.has(this.config.versionKey);
 
-		if(!hasVersion){
+		if (!hasVersion) {
 			// if no version is registered, boot up
 			await this.storage.set(
 				this.config.versionKey,
@@ -36,11 +36,11 @@ export class LocalStorageSavior extends GdprSaviorAdapter{
 		const serialized = await this.storage.get(this.config.storeKey);
 		const storageVersion = await this.storage.get(this.config.versionKey);
 
-		try{
+		try {
 			const manager = GdprDeserializer.manager(serialized);
 			const shouldUpdateVersion = this.config.comparator(storageVersion, this.config.version);
 
-			if(shouldUpdateVersion){ // Handle semantic update
+			if (shouldUpdateVersion) { // Handle semantic update
 				await this.storage.remove(this.config.storeKey);
 				await this.storage.set(
 					this.config.versionKey,
@@ -49,29 +49,29 @@ export class LocalStorageSavior extends GdprSaviorAdapter{
 				);
 
 				return null;
-			}else if(!!manager){
-				if(shouldUpdate)
+			} else if (!!manager) {
+				if (shouldUpdate)
 					await this.updateSharedManager(manager);
 
 				return manager;
 			}
 
 			return null;
-		}catch{
+		} catch {
 			return null;
 		}
 	}
 
-	public async store(manager: GdprManagerRaw): Promise<boolean>{
+	public async store(manager: GdprManagerRaw): Promise<boolean> {
 		await this.storage.set(
 			this.config.storeKey,
 			manager,
 			this.config.expiration(),
 		);
 
-		try{
+		try {
 			return this.exists();
-		}catch{
+		} catch {
 			return false;
 		}
 	}
