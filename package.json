@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/Voltra/gdpr-guard-local#readme",
   "dependencies": {
-    "gdpr-guard": "^2.1.0",
-    "moment": "^2.27.0",
+    "date-fns": "^2.28.0",
+    "gdpr-guard": "2.2",
     "store": "^2.0.12"
   },
   "devDependencies": {
