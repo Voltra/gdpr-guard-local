@@ -10,7 +10,7 @@
 		"build": "webpack --mode production",
 		"watch": "webpack --mode development --watch",
 		"clean": "rm -rf dist",
-		"predocs": "([[ -d ./docs ]] && rm -rf ./docs);",
+		"predocs": "([[ -d ./docs ]] && rm -rf ./docs) || true",
 		"docs": "typedoc --options typedoc.config.js --out docs src",
 		"predeploy:docs": "npm run docs",
 		"deploy:docs": "gh-pages -d docs"
