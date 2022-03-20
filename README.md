@@ -22,6 +22,14 @@ import {
     defaults,
     LocalStorageSavior,
 } from "gdpr-guard-local"
+
+
+// In your browser
+const {
+	// everything from gdpr-guard
+	defaults,
+	LocalStorageSavior,
+} = gdprGuardLocal;
 ```
 
 ## LocalStorageSavior
