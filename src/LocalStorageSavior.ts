@@ -13,11 +13,19 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 		this.storage = storeFactory();
 	}
 
-	public async updateSharedManager(_manager: GdprManager): Promise<void> {
-		//await Promise.resolve();
+	/**
+	 * @inheritDoc
+	 * @override
+	 */
+	public override async updateSharedManager(_manager: GdprManager): Promise<void> {
+		await Promise.resolve();
 	}
 
-	public async restore(shouldUpdate: boolean = true): Promise<GdprManager | null> {
+	/**
+	 * @inheritDoc
+	 * @override
+	 */
+	public override async restore(shouldUpdate: boolean = true): Promise<GdprManager | null> {
 		await this.storage.removeExpiredKeys(); // explicitely remove rexpired keys
 		const hasVersion = await this.storage.has(this.config.versionKey);
 
@@ -29,7 +37,7 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 				this.config.expiration(),
 			);
 
-			// avoir storage jacking
+			// avoid storage jacking
 			await this.storage.remove(this.config.storeKey);
 		}
 
@@ -62,7 +70,11 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 		}
 	}
 
-	public async store(manager: GdprManagerRaw): Promise<boolean> {
+	/**
+	 * @inheritDoc
+	 * @override
+	 */
+	public override async store(manager: GdprManagerRaw): Promise<boolean> {
 		await this.storage.set(
 			this.config.storeKey,
 			manager,

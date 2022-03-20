@@ -17,14 +17,24 @@ plugins.forEach(plugin => store.addPlugin(plugin));
 
 export const defaultStoreFactory: LocalStoreFactory = () => store as LocalStore;
 
-//GDPR says max 13 months
+/**
+ * Default value for the expiration. GDPR says max duration is 13 months
+ */
 export const expiration: DateFactory = () => addMonths(new Date(), 13);
 
+/**
+ * Parts of the default config that are most used.
+ * Default string equality test for versions, 13 months expiration
+ */
 export const defaultConfigParts: Partial<LocalStorageConfig> = {
 	comparator: versionComparator,
 	expiration,
 };
 
+/**
+ * Full default config.
+ * Keys are "gdpr" for the manager's state and "gdpr__version" for the version number.
+ */
 export const defaultConfig: LocalStorageConfig = {
 	storeKey: "gdpr",
 	versionKey: "gdpr__version",
@@ -33,6 +43,10 @@ export const defaultConfig: LocalStorageConfig = {
 	expiration,
 };
 
+/**
+ * Make a config object by overriding the {@link defaultConfig}
+ * @param config The user-provided config
+ */
 export const makeConfig = (config: Partial<LocalStorageConfig> = {}): LocalStorageConfig => {
 	return {
 		...defaultConfig,
