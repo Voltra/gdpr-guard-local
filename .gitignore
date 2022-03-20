@@ -4,6 +4,7 @@ tmp/
 log/
 logs/
 *.log
+docs/
 
 yarn.lock
 package-lock.json
