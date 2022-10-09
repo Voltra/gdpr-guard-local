@@ -1,5 +1,5 @@
 import { GdprDeserializer, GdprManager, GdprManagerRaw, GdprSaviorAdapter } from "gdpr-guard"
-import { LocalStorageConfig, LocalStore, LocalStoreFactory } from "./types";
+import { LocalStorageConfig, LocalStore, LocalStoreFactory, Version } from "./types";
 import { defaultStoreFactory, makeConfig } from "./defaults";
 
 export class LocalStorageSavior extends GdprSaviorAdapter {
@@ -42,7 +42,7 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 		}
 
 		const serialized = await this.storage.get(this.config.storeKey);
-		const storageVersion = await this.storage.get(this.config.versionKey);
+		const storageVersion = (await this.storage.get(this.config.versionKey)) as Version;
 
 		try {
 			const manager = GdprDeserializer.manager(serialized);
@@ -82,7 +82,8 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 		);
 
 		try {
-			return this.exists();
+			const exists = await this.exists();
+			return exists;
 		} catch {
 			return false;
 		}
