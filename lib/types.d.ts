@@ -10,7 +10,7 @@ export interface LocalStore {
      * @param value
      * @param expiration - The date upon which the value will be expired (and needs to be remove from the store)
      */
-    set(key: string, value: any, expiration: Date): Promise<void>;
+    set(key: string, value: unknown, expiration: Date): Promise<void>;
     /**
      * Remove the given value from the store
      * @param key The key to the value to remove
@@ -20,7 +20,7 @@ export interface LocalStore {
      * Get the given value from the store
      * @param key The key to the value to retrieve
      */
-    get(key: string): Promise<any>;
+    get(key: string): Promise<unknown>;
     removeExpiredKeys(): Promise<void>;
 }
 export declare type Version = string | number;
