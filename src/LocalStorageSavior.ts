@@ -1,4 +1,4 @@
-import { GdprDeserializer, GdprManager, GdprManagerRaw, GdprSaviorAdapter } from "gdpr-guard"
+import { GdprDeserializer, GdprManager, GdprManagerRaw, GdprSaviorAdapter } from "gdpr-guard";
 import { LocalStorageConfig, LocalStore, LocalStoreFactory, Version } from "./types";
 import { defaultStoreFactory, makeConfig } from "./defaults";
 
@@ -82,8 +82,7 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 		);
 
 		try {
-			const exists = await this.exists();
-			return exists;
+			return this.exists();
 		} catch {
 			return false;
 		}
