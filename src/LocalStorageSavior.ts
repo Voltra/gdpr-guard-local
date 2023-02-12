@@ -17,9 +17,7 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 	 * @inheritDoc
 	 * @override
 	 */
-	public override async updateSharedManager(_manager: GdprManager): Promise<void> {
-		await Promise.resolve();
-	}
+	public override async updateSharedManager(_manager: GdprManager): Promise<void> {}
 
 	/**
 	 * @inheritDoc
