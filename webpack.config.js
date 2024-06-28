@@ -13,7 +13,7 @@ module.exports = {
 	entry: here("./src/index.ts"),
 	devtool: "source-map",
 	plugins: [
-		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), // avoid bundling momentjs locales
+		// new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), // avoid bundling momentjs locales
 	],
 	module: {
 		rules: [

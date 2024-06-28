@@ -23,13 +23,13 @@ export interface LocalStore {
     get(key: string): Promise<unknown>;
     removeExpiredKeys(): Promise<void>;
 }
-export declare type Version = string | number;
+export type Version = string | number;
 /**
  * A function that compares two versions. It returns TRUE if the {@link newVersion} is greater
  * than the {@link oldVersion}
  */
-export declare type VersionComparator = (oldVersion: Version, newVersion: Version) => boolean;
-export declare type DateFactory = () => Date;
+export type VersionComparator = (oldVersion: Version, newVersion: Version) => boolean;
+export type DateFactory = () => Date;
 export interface LocalStorageConfig {
     /**
      * The key used to store the manager's state
@@ -53,4 +53,4 @@ export interface LocalStorageConfig {
      */
     expiration: DateFactory;
 }
-export declare type LocalStoreFactory = () => LocalStore;
+export type LocalStoreFactory = () => LocalStore;
