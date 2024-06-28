@@ -7,7 +7,7 @@ module.exports = {
     exclude: [
         "node_modules/"
     ],
-    theme: "node_modules/eledoc/bin/default/",
+    theme: "default",
 	includeVersion: true,
     hideGenerator: true,
 	githubPages: true,
