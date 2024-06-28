@@ -38,18 +38,21 @@
 	},
 	"homepage": "https://github.com/Voltra/gdpr-guard-local#readme",
 	"dependencies": {
-		"date-fns": "^2.28.0",
+		"date-fns": "^3.6.0",
 		"gdpr-guard": "^2.3.0",
 		"store": "^2.0.12"
 	},
 	"devDependencies": {
+		"@types/node": "^20.14.9",
+		"@types/webpack": "^5.28.5",
 		"eledoc": "^0.2.1",
-		"gh-pages": "^3.2.3",
-		"ts-loader": "^7.0.5",
-		"typedoc": "^0.17.7",
+		"gh-pages": "^6.1.1",
+		"ts-loader": "^9.5.1",
+		"ts-node": "^10.9.2",
+		"typedoc": "^0.23.24",
 		"typedoc-plugin-as-member-of": "^1.0.2",
-		"typescript": "4.6",
-		"webpack": "^4.43.0",
-		"webpack-cli": "^3.3.12"
+		"typescript": "^4.9.4",
+		"webpack": "^5.92.1",
+		"webpack-cli": "^5.0.1"
 	}
 }
