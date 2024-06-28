@@ -2,19 +2,21 @@ import { DateFactory, LocalStorageConfig, LocalStore, LocalStoreFactory, Version
 import store from "store"
 import compat from "store/plugins/v1-backcompat"
 import expire from "store/plugins/expire"
-import addMonths from "date-fns/addMonths"
+import { addMonths } from "date-fns/addMonths"
 
 export const versionComparator: VersionComparator = (oldVersion: Version, newVersion: Version) => {
 	return newVersion !== oldVersion;
 };
 
 const plugins = [
+	// @ts-ignore TS2548 (plugins and their types are poorly supported)
 	...compat,
 	expire,
 ];
 
 plugins.forEach(plugin => store.addPlugin(plugin));
 
+// @ts-expect-error TS2352 (plugins and their types are poorly supported)
 export const defaultStoreFactory: LocalStoreFactory = () => store as LocalStore;
 
 /**
