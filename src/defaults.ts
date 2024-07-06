@@ -2,7 +2,13 @@ import { DateFactory, LocalStorageConfig, LocalStore, LocalStoreFactory, Version
 import store from "store"
 import compat from "store/plugins/v1-backcompat"
 import expire from "store/plugins/expire"
-import { addMonths } from "date-fns/addMonths"
+// import { addMonths } from "date-fns/addMonths"
+import { addMonths } from "date-fns/fp"
+
+/**
+ * GDPR says max duration is 13 months
+ */
+const add13Months = addMonths(13);
 
 export const versionComparator: VersionComparator = (oldVersion: Version, newVersion: Version) => {
 	return newVersion !== oldVersion;
@@ -22,7 +28,7 @@ export const defaultStoreFactory: LocalStoreFactory = () => store as LocalStore;
 /**
  * Default value for the expiration. GDPR says max duration is 13 months
  */
-export const expiration: DateFactory = () => addMonths(new Date(), 13);
+export const expiration: DateFactory = () => add13Months(new Date());
 
 /**
  * Parts of the default config that are most used.
@@ -38,6 +44,7 @@ export const defaultConfigParts: Partial<LocalStorageConfig> = {
  * Keys are "gdpr" for the manager's state and "gdpr__version" for the version number.
  */
 export const defaultConfig: LocalStorageConfig = {
+	...defaultConfigParts,
 	storeKey: "gdpr",
 	versionKey: "gdpr__version",
 	version: "v0.0.0",

@@ -1,4 +1,4 @@
-import { GdprDeserializer, GdprManager, GdprManagerRaw, GdprSaviorAdapter } from "gdpr-guard";
+import { GdprDeserializer, GdprManager, GdprManagerDecorator, GdprManagerRaw, GdprSaviorAdapter } from "gdpr-guard";
 import { LocalStorageConfig, LocalStore, LocalStoreFactory, Version } from "./types";
 import { defaultStoreFactory, makeConfig } from "./defaults";
 
@@ -8,8 +8,9 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 	public constructor(
 		protected config: LocalStorageConfig = makeConfig(),
 		storeFactory: LocalStoreFactory = defaultStoreFactory,
+		decorator: GdprManagerDecorator|undefined = undefined,
 	) {
-		super();
+		super(decorator);
 		this.storage = storeFactory();
 	}
 
@@ -24,7 +25,7 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 	 * @override
 	 */
 	public override async restore(shouldUpdate: boolean = true): Promise<GdprManager | null> {
-		await this.storage.removeExpiredKeys(); // explicitely remove rexpired keys
+		await this.storage.removeExpiredKeys(); // explicitly remove expired keys
 		const hasVersion = await this.storage.has(this.config.versionKey);
 
 		if (!hasVersion) {
@@ -43,7 +44,7 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 		const storageVersion = (await this.storage.get(this.config.versionKey)) as Version;
 
 		try {
-			const manager = GdprDeserializer.manager(serialized);
+			const deserialized = GdprDeserializer.manager(serialized);
 			const shouldUpdateVersion = this.config.comparator(storageVersion, this.config.version);
 
 			if (shouldUpdateVersion) { // Handle semantic update
@@ -55,7 +56,9 @@ export class LocalStorageSavior extends GdprSaviorAdapter {
 				);
 
 				return null;
-			} else if (!!manager) {
+			} else if (!!deserialized) {
+				const manager = this.decorate(deserialized);
+
 				if (shouldUpdate)
 					await this.updateSharedManager(manager);
 
