@@ -1,9 +1,9 @@
-import { GdprManager, GdprManagerRaw, GdprSaviorAdapter } from "gdpr-guard";
+import { GdprManager, GdprManagerDecorator, GdprManagerRaw, GdprSaviorAdapter } from "gdpr-guard";
 import { LocalStorageConfig, LocalStore, LocalStoreFactory } from "./types";
 export declare class LocalStorageSavior extends GdprSaviorAdapter {
     protected config: LocalStorageConfig;
     protected storage: LocalStore;
-    constructor(config?: LocalStorageConfig, storeFactory?: LocalStoreFactory);
+    constructor(config?: LocalStorageConfig, storeFactory?: LocalStoreFactory, decorator?: GdprManagerDecorator | undefined);
     /**
      * @inheritDoc
      * @override
